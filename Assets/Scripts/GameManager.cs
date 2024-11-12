@@ -12,7 +12,8 @@ public class GameManager : MonoBehaviour
     public List<GameObject> carObjects = new List<GameObject>();
 
     public Vector3 playerStartPosition = new Vector3(0f, 1f, 0f);
-
+    public int life;
+    public bool GameOver = false;
 
     void Awake()
     {
@@ -29,7 +30,10 @@ public class GameManager : MonoBehaviour
         // 플레이어 오브젝트 생성
         CreatePlayer();
     }
-
+    private void Start()
+    {
+        life = 3;
+    }
     // 플레이어 생성 함수
     void CreatePlayer()
     {
@@ -45,6 +49,13 @@ public class GameManager : MonoBehaviour
         else
         {
             Debug.LogError("Player Prefab is not found in Resources/Prefabs folder!");
+        }
+    }
+    public void CheakGameOver()
+    {
+        if(life<=0)
+        {
+            GameOver = true;
         }
     }
 }
