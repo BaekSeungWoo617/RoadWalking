@@ -29,15 +29,28 @@ public class SpawnManager : MonoBehaviour
 
             }
         }
+        SpawnObjects(ambulPrefab);
     }
-
-    // 자동차 생성
     void SpawnObject(GameObject gamePrefab, Vector3 position)
     {
         if (gamePrefab != null)
+        {        
+                GameObject thisPrefab = Instantiate(gamePrefab, position, Quaternion.identity);
+                GameManager.instance.roadObjects.Add(thisPrefab);  // 생성된 자동차를 리스트에 추가
+        }
+    }
+    void SpawnObjects(GameObject gamePrefab)
+    {
+
+        if (gamePrefab != null)
         {
-            GameObject thisPrefab = Instantiate(gamePrefab, position, Quaternion.identity);
-            GameManager.instance.carObjects.Add(thisPrefab);  // 생성된 자동차를 리스트에 추가
+            for (int j = 0; j < 10; j++)
+            {
+                GameObject thisPrefab = Instantiate(gamePrefab, Vector3.zero, Quaternion.identity);
+                GameManager.instance.carObjects.Add(thisPrefab);  // 생성된 자동차를 리스트에 추가
+                thisPrefab.SetActive(false);
+            }
+
         }
     }
 }
